@@ -130,8 +130,9 @@ with col_input:
         pressure = st.number_input("Pressure (Pa)", min_value=0.0, value=91.19, step=0.01)
         time_min = st.number_input("Time (min)", min_value=0.0, value=100.0, step=1.0)
         
-        gas_map = {"NH3": 0, "N2": 1, "Ar": 2, "Mixed": 3}
-        gas_type = st.selectbox("Gas Type", options=list(gas_map.keys()), index=1)
+        # ✅ 修改处：只保留 NH3 和 N2，并调整默认索引为 0 (NH3)
+        gas_map = {"NH3": 0, "N2": 1}
+        gas_type = st.selectbox("Gas Type", options=list(gas_map.keys()), index=0)
         gas_encoded = gas_map[gas_type]
 
 # --- Middle: Arrow & Button ---
@@ -183,8 +184,3 @@ if predict_clicked:
         except Exception as e:
             result_placeholder.error(f"❌ Prediction error:\n{str(e)}")
             st.exception(e)
-
-# Footer Status Bar
-st.divider()
-st.caption(f"System Status: {'🟢 Model Ready' if model else '🔴 Model Missing'} | {status_msg}")
-
