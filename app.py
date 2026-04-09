@@ -71,7 +71,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🎯 CN Thin Film N/C Ratio Prediction System")
+st.title("🎯 RF-pecvd: a-C:N:H Film N/C Ratio Prediction System")
 st.markdown("---")
 
 # ================= Load Model (with Error Handling) =================
@@ -120,19 +120,19 @@ with col_input:
     c1, c2 = st.columns(2)
     with c1:
         power = st.number_input("Power (W)", min_value=0.0, value=100.0, step=1.0)
-        c_content = st.number_input("C Content (at%)", min_value=0.0, value=14.12, step=0.01)
-        n_content = st.number_input("N Content (at%)", min_value=0.0, value=31.92, step=0.01)
-        h_content = st.number_input("H Content (at%)", min_value=0.0, value=52.29, step=0.01)
-        de_val = st.number_input("DE of Carbon (eV)", min_value=0.0, value=4.55, step=0.01)
+        c_content = st.number_input("C (at%)", min_value=0.0, value=14.12, step=0.01)
+        n_content = st.number_input("N (at%)", min_value=0.0, value=31.92, step=0.01)
+        h_content = st.number_input("H (at%)", min_value=0.0, value=52.29, step=0.01)
+        de_val = st.number_input("DE of C (eV)", min_value=0.0, value=4.55, step=0.01)
     
     with c2:
-        input_nc = st.number_input("Input N/C Ratio", min_value=0.0, value=3.52, step=0.01)
+        input_nc = st.number_input("N/C-in", min_value=0.0, value=3.52, step=0.01)
         pressure = st.number_input("Pressure (Pa)", min_value=0.0, value=91.19, step=0.01)
         time_min = st.number_input("Time (min)", min_value=0.0, value=100.0, step=1.0)
         
         # ✅ 修改处：只保留 NH3 和 N2，并调整默认索引为 0 (NH3)
         gas_map = {"NH3": 0, "N2": 1}
-        gas_type = st.selectbox("Gas Type", options=list(gas_map.keys()), index=0)
+        gas_type = st.selectbox("N-Type", options=list(gas_map.keys()), index=0)
         gas_encoded = gas_map[gas_type]
 
 # --- Middle: Arrow & Button ---
